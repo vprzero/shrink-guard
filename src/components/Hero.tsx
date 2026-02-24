@@ -24,21 +24,21 @@ const Hero = () => (
         </div>
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Copy */}
-        <div>
+        <div className="min-w-0">
           <div className="inline-flex items-center gap-2 bg-primary/15 border border-primary/25 rounded-full px-3 py-1 mb-6">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span className="text-primary text-xs font-semibold">Maine lobster dealers are losing $40K+/year to shrink</span>
           </div>
 
-          <h1 className="font-display text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-cream leading-[1.1] tracking-tight">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-cream leading-[1.1] tracking-tight">
             You're losing money<br />
             in your tanks.<br />
             <span className="text-primary">Every single day.</span>
           </h1>
 
-          <p className="text-cream/60 text-lg mt-6 max-w-lg leading-relaxed">
+          <p className="text-cream/60 text-base sm:text-lg mt-6 max-w-lg leading-relaxed">
             Lobster dies. You eat the cost. ShrinkGuard tracks every lot, every tank, every degree — 
             and tells you exactly what to sell, hold, or move <em>before</em> you lose another pound.
           </p>
@@ -58,22 +58,22 @@ const Hero = () => (
             </a>
           </div>
 
-          <div className="flex items-center gap-6 mt-8 pt-6 border-t border-cream/10">
+          <div className="flex items-center gap-4 sm:gap-6 mt-8 pt-6 border-t border-cream/10">
             {[
               { n: "240+", l: "dealers in Maine alone" },
               { n: "20%", l: "shrink rates reported (USDA)" },
               { n: "$0", l: "upfront cost to start" },
             ].map((s) => (
               <div key={s.n}>
-                <div className="font-display font-bold text-cream text-lg">{s.n}</div>
-                <div className="text-cream/40 text-xs">{s.l}</div>
+                <div className="font-display font-bold text-cream text-base sm:text-lg">{s.n}</div>
+                <div className="text-cream/40 text-[10px] sm:text-xs">{s.l}</div>
               </div>
             ))}
           </div>
         </div>
 
         {/* Dashboard */}
-        <div className="lg:translate-x-4">
+        <div className="min-w-0 w-full">
           <DashboardMockup />
         </div>
       </div>
