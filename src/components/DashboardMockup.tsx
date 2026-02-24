@@ -9,6 +9,14 @@ const lotData = [
   { id: "L-4810", source: "Swan's Island Co-op", lbs: 1600, grade: "Hard", tankTemp: 40.5, hours: 31, shrinkPct: 3.3, risk: "medium", estLoss: "$378" },
 ];
 
+const marineData = [
+  { label: "Water Temp", value: "41.8°F" },
+  { label: "Wind", value: "18 mph NE" },
+  { label: "Tide", value: "Outgoing (Low in 1h 12m)" },
+  { label: "Baro", value: "29.84 inHg" },
+  { label: "Sea State", value: "Moderate Chop" },
+];
+
 const riskBadge = (risk: string) => {
   const cls = risk === "high" ? "badge-risk-high" : risk === "medium" ? "badge-risk-medium" : "badge-risk-low";
   return <span className={cls}>{risk === "high" ? "⚠ HIGH" : risk === "medium" ? "● MED" : "✓ LOW"}</span>;
@@ -57,12 +65,15 @@ const DashboardMockup = () => {
         </div>
       </div>
 
-      {/* Top bar */}
-      <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-navy-light/30 min-w-0">
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-          <span className="font-display font-bold text-cream text-xs sm:text-sm tracking-tight shrink-0">ShrinkGuard™</span>
-          <span className="text-cream/40 text-xs hidden sm:inline">|</span>
-          <span className="text-cream/50 text-xs hidden sm:inline truncate">Harbor Lobster Co.</span>
+      {/* Top bar with location */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 border-b border-navy-light/30 gap-2 min-w-0">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <span className="font-display font-bold text-cream text-xs sm:text-sm tracking-tight shrink-0">ShrinkGuard™</span>
+            <span className="text-cream/40 text-xs">|</span>
+            <span className="text-cream/50 text-xs truncate">Harbor Lobster Co. — Perkins Cove, ME</span>
+          </div>
+          <div className="text-cream/30 text-[9px] sm:text-[10px] uppercase tracking-wider mt-0.5">Live Marine Conditions</div>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <span className="text-[10px] sm:text-xs text-emerald-400 flex items-center gap-1">
@@ -71,6 +82,16 @@ const DashboardMockup = () => {
             <span className="sm:hidden">Online</span>
           </span>
         </div>
+      </div>
+
+      {/* Marine weather data strip */}
+      <div className="flex flex-wrap gap-x-4 gap-y-1 px-3 sm:px-4 py-2 border-b border-navy-light/20 bg-navy-light/10">
+        {marineData.map((d) => (
+          <div key={d.label} className="flex items-center gap-1.5 text-[10px] sm:text-xs">
+            <span className="text-cream/35 uppercase tracking-wider">{d.label}:</span>
+            <span className="text-cream/65 font-mono">{d.value}</span>
+          </div>
+        ))}
       </div>
 
       {/* Stats row */}
@@ -106,7 +127,7 @@ const DashboardMockup = () => {
         ))}
       </div>
 
-      {/* Table - desktop, Card layout - mobile */}
+      {/* Table - desktop */}
       <div className="hidden sm:block overflow-x-auto">
         <table className="w-full text-xs">
           <thead>
@@ -126,27 +147,17 @@ const DashboardMockup = () => {
             {lotData.map((lot) => (
               <tr
                 key={lot.id}
-                className={`border-b border-navy-light/10 ${
-                  lot.risk === "high" ? "bg-primary/5" : ""
-                } hover:bg-navy-light/20 transition-colors`}
+                className={`border-b border-navy-light/10 ${lot.risk === "high" ? "bg-primary/5" : ""} hover:bg-navy-light/20 transition-colors`}
               >
                 <td className="px-3 py-2 font-mono text-secondary">{lot.id}</td>
                 <td className="px-3 py-2 text-cream/80">{lot.source}</td>
                 <td className="px-3 py-2 text-right text-cream/80 font-mono">{lot.lbs.toLocaleString()}</td>
                 <td className="px-3 py-2 text-cream/60">{lot.grade}</td>
-                <td className={`px-3 py-2 text-right font-mono ${lot.tankTemp > 41 ? "text-primary" : "text-cream/70"}`}>
-                  {lot.tankTemp}
-                </td>
-                <td className={`px-3 py-2 text-right font-mono ${lot.hours > 36 ? "text-primary" : "text-cream/70"}`}>
-                  {lot.hours}
-                </td>
-                <td className={`px-3 py-2 text-right font-mono ${lot.shrinkPct > 4 ? "text-primary font-bold" : "text-cream/70"}`}>
-                  {lot.shrinkPct}%
-                </td>
+                <td className={`px-3 py-2 text-right font-mono ${lot.tankTemp > 41 ? "text-primary" : "text-cream/70"}`}>{lot.tankTemp}</td>
+                <td className={`px-3 py-2 text-right font-mono ${lot.hours > 36 ? "text-primary" : "text-cream/70"}`}>{lot.hours}</td>
+                <td className={`px-3 py-2 text-right font-mono ${lot.shrinkPct > 4 ? "text-primary font-bold" : "text-cream/70"}`}>{lot.shrinkPct}%</td>
                 <td className="px-3 py-2">{riskBadge(lot.risk)}</td>
-                <td className={`px-3 py-2 text-right font-mono ${lot.risk === "high" ? "text-primary font-bold" : "text-cream/70"}`}>
-                  {lot.estLoss}
-                </td>
+                <td className={`px-3 py-2 text-right font-mono ${lot.risk === "high" ? "text-primary font-bold" : "text-cream/70"}`}>{lot.estLoss}</td>
               </tr>
             ))}
           </tbody>

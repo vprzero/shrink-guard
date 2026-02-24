@@ -1,4 +1,5 @@
 import DashboardMockup from "./DashboardMockup";
+import heroImage from "@/assets/hero-lobster.webp";
 
 const Hero = () => (
   <section className="relative section-navy overflow-hidden">
@@ -24,7 +25,8 @@ const Hero = () => (
         </div>
       </nav>
 
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      {/* Hero content: text left, image right */}
+      <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         {/* Copy */}
         <div className="min-w-0">
           <div className="inline-flex items-center gap-2 bg-primary/15 border border-primary/25 rounded-full px-3 py-1 mb-6">
@@ -72,10 +74,20 @@ const Hero = () => (
           </div>
         </div>
 
-        {/* Dashboard */}
-        <div className="min-w-0 w-full">
-          <DashboardMockup />
+        {/* Hero image */}
+        <div className="min-w-0 flex justify-center md:justify-end">
+          <img
+            src={heroImage}
+            alt="Lobsterman sorting live lobsters in holding tanks at a Maine waterfront pound"
+            className="w-full max-w-md md:max-w-full rounded-xl border border-cream/10 object-cover aspect-square"
+            loading="eager"
+          />
         </div>
+      </div>
+
+      {/* Dashboard below hero */}
+      <div className="mt-12 md:mt-16 w-full">
+        <DashboardMockup />
       </div>
     </div>
   </section>
